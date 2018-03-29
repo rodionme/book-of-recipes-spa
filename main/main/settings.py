@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'recipes.apps.RecipesConfig',
     'livereload',
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',
