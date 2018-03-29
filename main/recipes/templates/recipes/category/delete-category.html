@@ -1,0 +1,20 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+  <main class="main-content">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
+
+    <form action="" method="post">
+      {% csrf_token %}
+
+      <p>Are you sure?</p>
+
+      <button type="submit">Delete</button>
+      <a href="{% url 'category' category.id %}">Cancel</a>
+    </form>
+  </main>
+{% endblock %}

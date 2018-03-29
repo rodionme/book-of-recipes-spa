@@ -1,0 +1,23 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+  <main class="main-content">
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
+
+    <form action="" method="post">
+      {% csrf_token %}
+
+      {{ form.as_p }}
+
+      <button type="submit">Save</button>
+    </form>
+    {# TODO: Implement posibility to add new category without page refresh #}
+    {# TODO: Implement posibility to add new cuisine without page refresh #}
+    {# TODO: Implement posibility to add new ingredient without page refresh #}
+
+  </main>
+{% endblock %}

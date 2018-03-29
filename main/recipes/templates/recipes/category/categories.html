@@ -1,0 +1,19 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+  <main class="main-content">
+    {% if categories %}
+      <ul>
+        {% for category in categories %}
+          <li><a href="{% url 'category' category.id %}">{{ category.name }}</a></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No categories are available.</p>
+    {% endif %}
+
+    <a href="{% url 'add_category' %}">Add new category</a>
+  </main>
+{% endblock %}

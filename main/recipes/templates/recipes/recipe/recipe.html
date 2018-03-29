@@ -1,0 +1,21 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+  <main class="main-content">
+    <p>Name: {{ recipe.name }}</p>
+    <p>Category: {{ recipe.category }}</p>
+    <p>Cuisine: {{ recipe.cuisine }}</p>
+    <p>Description: {{ recipe.description }}</p>
+    <p>Ingredients:</p>
+    <ul>
+      {% for ingredient in recipe.ingredients.all %}
+        <li>{{ ingredient.name }}</li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'edit_recipe' recipe.id %}">Edit</a>
+    <a href="{% url 'delete_recipe' recipe.id %}">Delete</a>
+  </main>
+{% endblock %}

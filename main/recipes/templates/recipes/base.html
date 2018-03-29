@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'recipes/favicon.png' %}"/>
+  <title>{% block title %}Book of Recipes{% endblock %}</title>
+</head>
+<body>
+  <header class="main-header">
+    <a href="/" class="logo">Book of Recipes</a>
+
+    {% block search %}{% endblock %}
+
+    <div class="main-menu">
+      <button class="hamburger hamburger--spring" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
+      <ul class="menu-items-list">
+        <li><a href="{% url 'add_recipe' %}">Add new recipe</a></li>
+        <hr>
+        <li><a href="{% url 'categories' %}">Categories</a></li>
+        <li><a href="{% url 'cuisines' %}">Cuisines</a></li>
+        <li><a href="{% url 'ingredients' %}">Ingredients</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="divider divider-2"></div>
+
+  <section class="content">
+    {% block content %}{% endblock %}
+  </section>
+
+  <script src="{% static 'recipes/main.js' %}"></script>
+</body>
+</html>

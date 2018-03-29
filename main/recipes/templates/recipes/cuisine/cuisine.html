@@ -1,0 +1,12 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}{{ cuisine.name }}{% endblock %}
+
+{% block content %}
+  <main class="main-content">
+    <p>Name: {{ cuisine.name }}</p>
+
+    <a href="{% url 'edit_cuisine' cuisine.id %}">Edit</a>
+    <a href="{% url 'delete_cuisine' cuisine.id %}">Delete</a>
+  </main>
+{% endblock %}

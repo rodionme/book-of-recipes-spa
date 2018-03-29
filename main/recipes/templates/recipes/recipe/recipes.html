@@ -1,0 +1,76 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Recipes{% endblock %}
+
+{% block search %}
+  <div class="search-wrapper">
+    <form action="" class="search-form">
+      <input class="search" name="q" type="text" {% if query %}value="{{ query }}"{% endif %} placeholder="Input recipe name" autocomplete="off"/>
+    </form>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <main class="main-content">
+    {% if recipes %}
+      <section class="table-wrapper">
+        <table class="recipes-table">
+          <thead>
+            <tr>
+              <th class="col-name">Name</th>
+              <th class="col-category">Category</th>
+              <th class="col-cuisine">Cuisine</th>
+              <th class="col-ingredients">Ingredients</th>
+            </tr>
+          </thead>
+
+          <tbody>
+          {% for recipe in recipes %}
+            <tr>
+              <td class="col-name name"><a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></td>
+              <td class="col-category category"><span>{{ recipe.category }}</span></td>
+              <td class="col-cuisine cuisine"><span>{{ recipe.cuisine }}</span></td>
+              <td class="col-ingredients ingredients">
+                {% for ingredient in recipe.ingredients.all %}
+                  {% if not selected_ingredients or selected_ingredients and ingredient.id in selected_ingredients %}
+                    <span class="ingredient">{{ ingredient.name }}</span>
+                  {% else %}
+                    <span class="ingredient missing">{{ ingredient.name }}</span>
+                  {% endif %}
+                {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    {% else %}
+      <p class="no-data-available">No recipes are available.</p>
+    {% endif %}
+  </main>
+
+  <div class="divider divider-1"></div>
+
+  <aside class="filters">
+    <form action="" class="filter-form">
+      <section class="filter-group">
+        <h4 class="filter-title">Ingredients</h4>
+
+        <ul class="filter-list">
+          {# TODO: Pull up selected ingredients to top of the list #}
+          {# TODO: Add filtering input field for a quick finding of ingredient #}
+
+          {% for ingredient in ingredients %}
+            <li><label>
+              <input type="checkbox" name="i" value="{{ ingredient.id }}" {% if ingredient.id in selected_ingredients %}checked{% endif %}>
+              <span>{{ ingredient.name }}</span>
+            </label></li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <button class="filter-apply" type="submit">Apply</button>
+      {# TODO: Add reset button #}
+    </form>
+  </aside>
+{% endblock %}
