@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Caveat" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'recipes/style.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'recipes/favicon.png' %}"/>
+  <title>{% block title %}Book of Recipes{% endblock %}</title>
+</head>
+<body>
+  <div id="app">
+    <!-- All app content will be here -->
+  </div>
+
+  <script src="{% static 'recipes/main.js' %}"></script>
+</body>
+</html>
