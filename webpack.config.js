@@ -3,7 +3,7 @@ const autoprefixer = require('autoprefixer');
 
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './front/app.js',
   output: {
     path: `${__dirname}/main/recipes/static/recipes`,
@@ -50,7 +50,12 @@ module.exports = {
             },
           },
         ],
-      }
+      },
+      {
+        test: /\.svg$/,
+        include: path.resolve(__dirname, 'front'),
+        loader: require.resolve('url-loader')
+      },
     ]
   },
 };
