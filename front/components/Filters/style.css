@@ -1,0 +1,36 @@
+.filters {
+  width: 300px;
+  flex-shrink: 0;
+  padding-left: 40px;
+  font-size: 125%;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 16px;
+}
+
+.filter-list {
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.filter-apply {
+  flex-shrink: 0;
+  align-self: left;
+  margin-top: 26px;
+}
