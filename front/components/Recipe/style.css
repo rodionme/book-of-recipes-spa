@@ -1,0 +1,16 @@
+.ingredient::after {
+  content: ', ';
+}
+
+.ingredient:last-child::after {
+  content: '';
+}
+
+.ingredient.missing,
+.ingredient.missing + .ingredient::before {
+  color: #ccc;
+}
+
+.ingredient.missing::before {
+  color: #333;
+}
