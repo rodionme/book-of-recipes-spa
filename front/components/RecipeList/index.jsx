@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './style.css';
 import Recipe from '../Recipe';
 
@@ -35,3 +36,8 @@ export default class RecipeList extends React.Component {
     );
   }
 }
+
+RecipeList.propTypes = {
+  recipes: PropTypes.arrayOf(PropTypes.object),
+  selectedIngredients: PropTypes.arrayOf(PropTypes.number),
+};

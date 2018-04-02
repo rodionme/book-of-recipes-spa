@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './style.css';
 import Search from '../Search';
 import Menu from '../Menu';
@@ -16,3 +17,7 @@ export default class Header extends React.Component {
     );
   }
 }
+
+Header.propTypes = {
+  onSearchSubmit: PropTypes.func,
+};

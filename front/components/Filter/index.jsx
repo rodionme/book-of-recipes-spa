@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './style.css';
 
 
@@ -39,3 +40,11 @@ export default class Filter extends React.Component {
     );
   }
 }
+
+Filter.propTypes = {
+  filter: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }),
+  onFilterChange: PropTypes.func,
+};

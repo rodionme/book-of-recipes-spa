@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './style.css';
 
 
-export default class App extends React.Component {
+export default class Recipe extends React.Component {
   renderIngredients() {
     let selectedIngredients = this.props.selectedIngredients;
 
@@ -30,3 +31,15 @@ export default class App extends React.Component {
     );
   }
 }
+
+Recipe.propTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.object,
+    cuisine: PropTypes.object,
+    ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }),
+  selectedIngredients: PropTypes.array,
+};

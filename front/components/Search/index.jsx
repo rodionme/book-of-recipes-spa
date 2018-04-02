@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import './style.css';
 
 
-export default class App extends React.Component {
+export default class Search extends React.Component {
   constructor() {
     super();
 
@@ -19,3 +20,7 @@ export default class App extends React.Component {
     );
   }
 }
+
+Search.propTypes = {
+  onSearchSubmit: PropTypes.func,
+};

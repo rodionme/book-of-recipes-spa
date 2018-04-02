@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import './style.css';
 import Filter from '../Filter';
 
@@ -65,3 +66,7 @@ export default class Filters extends React.Component {
     );
   }
 }
+
+Filters.propTypes = {
+  onFiltersSubmit: PropTypes.func,
+};
