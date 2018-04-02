@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import './style.css';
 import Filter from '../Filter';
 
@@ -9,19 +10,33 @@ export default class Filters extends React.Component {
 
     this.state = {
       ingredients: [],
+      selectedIngredients: [],
     };
+
+    this.onFilterChange = this.onFilterChange.bind(this);
   }
 
   componentDidMount() {
-    fetch('api/ingredients')
-      .then(response => {
-        return response.json();
-      })
-      .then(ingredients => {
+    axios.get('api/ingredients/')
+      .then(({data: ingredients} = response) => {
         this.setState({
           ingredients
         });
       });
+  }
+
+  onFilterChange(e, filterId, isChecked) {
+    let updatedSelectedIngredients = this.state.selectedIngredients;
+
+    if (isChecked) {
+      updatedSelectedIngredients.push(filterId);
+    } else {
+      updatedSelectedIngredients = updatedSelectedIngredients.filter(e => e !== filterId);
+    }
+
+    this.setState({
+      selectedIngredients: updatedSelectedIngredients
+    });
   }
 
   render() {
@@ -29,7 +44,7 @@ export default class Filters extends React.Component {
 
     return (
       <aside className="filters">
-        <form action="" className="filter-form">
+        <form action="" className="filter-form" onSubmit={e => this.props.onFiltersSubmit(e, this.state.selectedIngredients)}>
           <section className="filter-group">
             <h4 className="filter-title">Ingredients</h4>
 
@@ -38,7 +53,7 @@ export default class Filters extends React.Component {
               {/* TODO: Add filtering input field for a quick finding of ingredient */}
 
               {ingredients.map(ingredient => {
-                return <Filter key={ingredient.id} filter={ingredient}/>;
+                return <Filter key={ingredient.id} filter={ingredient} onFilterChange={this.onFilterChange}/>;
               })}
             </ul>
           </section>
