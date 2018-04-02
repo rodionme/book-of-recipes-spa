@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/rodionme/book-of-recipes-spa#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-router": "^4.2.0",
