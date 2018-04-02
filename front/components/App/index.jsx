@@ -12,20 +12,24 @@ export default class App extends React.Component {
 
     this.state = {
       recipes: [],
+      query: '',
       selectedIngredients: [],
     };
 
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onFiltersSubmit = this.onFiltersSubmit.bind(this);
   }
 
   componentDidMount() {
-    // TODO: Move requests to the separate services
-    axios.get('api/recipes/')
-      .then(({data: recipes} = response) => {
-        this.setState({
-          recipes
-        });
-      });
+    this.getRecipes()
+  }
+
+  onSearchSubmit(e, query) {
+    e.preventDefault();
+
+    this.setState({
+      query
+    }, this.getRecipes);
   }
 
   onFiltersSubmit(e, selectedIngredients) {
@@ -33,13 +37,21 @@ export default class App extends React.Component {
 
     this.setState({
       selectedIngredients
-    });
+    }, this.getRecipes);
+  }
 
-    axios.get('api/recipes/', {
-      params: {
-        i: selectedIngredients.join(',')
-      }
-    })
+  getRecipes() {
+    let params = {};
+
+    if (this.state.query) {
+      params.q = this.state.query;
+    }
+
+    if (this.state.selectedIngredients.length) {
+      params.i = this.state.selectedIngredients.join(',');
+    }
+
+    axios.get('api/recipes/', { params })
       .then(({data: recipes} = response) => {
         this.setState({
           recipes,
@@ -50,7 +62,7 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header/>
+        <Header onSearchSubmit={this.onSearchSubmit}/>
 
         <div className="divider divider-2"/>
 

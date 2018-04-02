@@ -10,8 +10,8 @@ export default class Header extends React.Component {
       <header className="main-header">
         <a href="/" className="logo">Book of Recipes</a>
 
-        <Search/>
-        <Menu />
+        <Search onSearchSubmit={this.props.onSearchSubmit}/>
+        <Menu/>
       </header>
     );
   }
