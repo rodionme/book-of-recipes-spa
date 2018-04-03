@@ -8,7 +8,7 @@ import Cuisines from './pages/Cuisines';
 import Cuisine from './pages/Cuisine';
 import Categories from './pages/Categories';
 import Category from './pages/Category';
-import NotFound from './NotFound';
+import NotFound from './pages/NotFound';
 
 
 const Router = () => (
