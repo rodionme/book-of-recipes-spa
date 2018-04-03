@@ -6,7 +6,7 @@ import Filters from '../../Filters'
 import RecipeList from '../../RecipeList'
 
 
-export default class Home extends React.Component {
+export default class Recipes extends React.Component {
   constructor() {
     super();
 
