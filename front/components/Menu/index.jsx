@@ -35,11 +35,11 @@ export default class Menu extends React.Component {
           <CSSTransitionGroup transitionName="slide" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
             {this.state.isOpened && (
               <ul className="menu-items-list">
-                <li><a href="#add_recipe">Add new recipe</a></li>
+                <li><a href="/add_recipe">Add new recipe</a></li>
                 <hr/>
-                <li><a href="#categories">Categories</a></li>
-                <li><a href="#cuisines">Cuisines</a></li>
-                <li><a href="#ingredients">Ingredients</a></li>
+                <li><a href="/categories">Categories</a></li>
+                <li><a href="/cuisines">Cuisines</a></li>
+                <li><a href="/ingredients">Ingredients</a></li>
               </ul>
             )}
           </CSSTransitionGroup>
