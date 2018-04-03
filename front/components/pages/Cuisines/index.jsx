@@ -27,7 +27,7 @@ export default class Cuisines extends React.Component {
 
     return (
       <React.Fragment>
-        <Header onSearchSubmit={this.onSearchSubmit}/>
+        <Header noSearch/>
 
         <div className="divider divider-2"/>
 
@@ -36,7 +36,7 @@ export default class Cuisines extends React.Component {
             {cuisines.length ? (
               <ul>
                 {cuisines.map(cuisine => {
-                  return <li key={cuisine.id}><a href={cuisine.id}>{cuisine.name}</a></li>
+                  return <li key={cuisine.id}><a href={`/cuisines/${cuisine.id}`}>{cuisine.name}</a></li>
                 })}
               </ul>
             )

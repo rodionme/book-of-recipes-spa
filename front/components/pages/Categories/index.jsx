@@ -27,7 +27,7 @@ export default class Categories extends React.Component {
 
     return (
       <React.Fragment>
-        <Header onSearchSubmit={this.onSearchSubmit}/>
+        <Header noSearch/>
 
         <div className="divider divider-2"/>
 
@@ -36,7 +36,7 @@ export default class Categories extends React.Component {
             {categories.length ? (
               <ul>
                 {categories.map(category => {
-                  return <li key={category.id}><a href={category.id}>{category.name}</a></li>
+                  return <li key={category.id}><a href={`/categories/${category.id}`}>{category.name}</a></li>
                 })}
               </ul>
             )

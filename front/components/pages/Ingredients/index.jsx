@@ -27,7 +27,7 @@ export default class Ingredients extends React.Component {
 
     return (
       <React.Fragment>
-        <Header onSearchSubmit={this.onSearchSubmit}/>
+        <Header noSearch/>
 
         <div className="divider divider-2"/>
 
@@ -36,7 +36,7 @@ export default class Ingredients extends React.Component {
             {ingredients.length ? (
               <ul>
                 {ingredients.map(ingredient => {
-                  return <li key={ingredient.id}><a href={ingredient.id}>{ingredient.name}</a></li>
+                  return <li key={ingredient.id}><a href={`/ingredients/${ingredient.id}`}>{ingredient.name}</a></li>
                 })}
               </ul>
             )
