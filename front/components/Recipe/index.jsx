@@ -21,7 +21,7 @@ export default class Recipe extends React.Component {
 
     return (
       <tr key={recipe.id}>
-        <td className="col-name name"><a href="#recipe">{recipe.name}</a></td>
+        <td className="col-name name"><a href={`/recipes/${recipe.id}`}>{recipe.name}</a></td>
         <td className="col-category category"><span>{recipe.category.name}</span></td>
         <td className="col-cuisine cuisine"><span>{recipe.cuisine.name}</span></td>
         <td className="col-ingredients ingredients">
