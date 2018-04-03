@@ -18,7 +18,7 @@ export default class Filters extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('api/ingredients/')
+    axios.get('/api/ingredients/')
       .then(({data: ingredients} = response) => {
         this.setState({
           ingredients
