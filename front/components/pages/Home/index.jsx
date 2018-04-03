@@ -51,7 +51,7 @@ export default class Home extends React.Component {
       params.i = this.state.selectedIngredients.join(',');
     }
 
-    axios.get('api/recipes/', { params })
+    axios.get('/api/recipes/', { params })
       .then(({data: recipes} = response) => {
         this.setState({
           recipes,
