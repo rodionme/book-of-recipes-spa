@@ -11,7 +11,9 @@ export default class Header extends React.Component {
       <header className="main-header">
         <a href="/" className="logo">Book of Recipes</a>
 
-        <Search onSearchSubmit={this.props.onSearchSubmit}/>
+        {!this.props.noSearch &&
+          <Search onSearchSubmit={this.props.onSearchSubmit}/>
+        }
         <Menu/>
       </header>
     );
