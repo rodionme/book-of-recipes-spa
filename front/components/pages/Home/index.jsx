@@ -1,12 +1,12 @@
 import React from 'react'
 import axios from 'axios';
 import './style.css';
-import Header from '../Header'
-import Filters from '../Filters'
-import RecipeList from '../RecipeList'
+import Header from '../../Header'
+import Filters from '../../Filters'
+import RecipeList from '../../RecipeList'
 
 
-export default class App extends React.Component {
+export default class Home extends React.Component {
   constructor() {
     super();
 
