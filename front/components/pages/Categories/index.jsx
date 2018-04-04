@@ -44,7 +44,7 @@ export default class Categories extends React.Component {
               <p>No categories are available.</p>
             }
 
-            <a href="/add-category">Add new category</a>
+            <a href="/categories/add">Add new category</a>
           </main>
         </section>
       </React.Fragment>

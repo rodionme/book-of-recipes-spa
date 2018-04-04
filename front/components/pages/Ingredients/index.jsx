@@ -44,7 +44,7 @@ export default class Ingredients extends React.Component {
               <p>No ingredients are available.</p>
             }
 
-            <a href="/add-ingredient">Add new ingredient</a>
+            <a href="/ingredients/add">Add new ingredient</a>
           </main>
         </section>
       </React.Fragment>

@@ -44,7 +44,7 @@ export default class Cuisines extends React.Component {
               <p>No cuisines are available.</p>
             }
 
-            <a href="/add-cuisine">Add new cuisine</a>
+            <a href="/cuisines/add">Add new cuisine</a>
           </main>
         </section>
       </React.Fragment>
