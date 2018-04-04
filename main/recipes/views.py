@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 from django.db.models import Count
 from rest_framework.viewsets import ModelViewSet
-from .serializers import RecipeSerializer, CategorySerializer, CuisineSerializer, IngredientSerializer
+from .serializers import RecipeGetSerializer, RecipePostSerializer, CategorySerializer, CuisineSerializer, IngredientSerializer
 from .models import Recipe, Ingredient, Cuisine, Category
 
 
@@ -11,7 +11,12 @@ class IndexView(TemplateView):
 
 class RecipeViewSet(ModelViewSet):
     queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return RecipePostSerializer
+
+        return RecipeGetSerializer
 
     def get_queryset(self):
         recipes = Recipe.objects.all()

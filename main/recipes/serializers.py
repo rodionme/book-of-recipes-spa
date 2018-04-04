@@ -26,11 +26,26 @@ class IngredientSerializer(serializers.ModelSerializer):
         fields = ('id', 'name')
 
 
-class RecipeSerializer(serializers.ModelSerializer):
+class RecipeGetSerializer(serializers.ModelSerializer):
     id = serializers.ReadOnlyField()
     category = CategorySerializer()
     cuisine = CuisineSerializer()
     ingredients = IngredientSerializer(many=True)
+
+    class Meta:
+        model = Recipe
+        fields = (
+            'id',
+            'name',
+            'category',
+            'cuisine',
+            'description',
+            'ingredients',
+        )
+
+
+class RecipePostSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
 
     class Meta:
         model = Recipe
