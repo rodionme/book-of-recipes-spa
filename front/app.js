@@ -6,5 +6,6 @@ import { getCookie } from './helpers';
 
 
 axios.defaults.headers.post['X-XSRF-TOKEN'] = getCookie('csrftoken');
+axios.defaults.headers.put['X-XSRF-TOKEN'] = getCookie('csrftoken');
 
 ReactDOM.render(<Router />, document.getElementById('app'));
