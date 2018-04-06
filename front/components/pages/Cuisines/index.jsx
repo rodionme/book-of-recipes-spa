@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getCuisines } from "../../../services";
 import './style.css';
 import Header from '../../Header'
 
@@ -14,7 +14,7 @@ export default class Cuisines extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/cuisines/')
+    getCuisines()
       .then(({data: cuisines} = response) => {
         this.setState({
           cuisines

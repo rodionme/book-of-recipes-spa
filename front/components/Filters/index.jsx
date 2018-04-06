@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getIngredients } from "../../services";
 import PropTypes from 'prop-types';
 import './style.css';
 import Filter from '../Filter';
@@ -18,7 +18,7 @@ export default class Filters extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/ingredients/')
+    getIngredients()
       .then(({data: ingredients} = response) => {
         this.setState({
           ingredients

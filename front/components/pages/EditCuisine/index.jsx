@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getCuisine, createCuisine, updateCuisine } from "../../../services";
 import PropTypes from 'prop-types';
 import './style.css';
 import Header from '../../Header'
@@ -10,11 +10,29 @@ export default class EditCuisine extends React.Component {
     super();
 
     this.state = {
+      cuisineId: null,
       name: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    let cuisineId = this.props.match.params.cuisineId;
+
+    if (cuisineId) {
+      this.setState({
+        cuisineId,
+      }, () => {
+        getCuisine(this.state.cuisineId)
+          .then(({data: cuisine} = response) => {
+            this.setState({
+              name: cuisine.name,
+            });
+          });
+      });
+    }
   }
 
   handleChange(e) {
@@ -25,13 +43,23 @@ export default class EditCuisine extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    axios.post(`/api/cuisines/`, {
+    let cuisineId = this.state.cuisineId;
+    let data = {
       name: this.state.name,
-    })
-      .then(() => {
-        this.props.history.push(`/cuisines`);
-      });
+    };
+
+    // TODO: CSRF token is absent
+    if (cuisineId) {
+      updateCuisine(cuisineId, data)
+        .then(() => {
+          this.props.history.push(`/cuisines`);
+        });
+    } else {
+      createCuisine(data)
+        .then(() => {
+          this.props.history.push(`/cuisines`);
+        });
+    }
   }
 
   render() {

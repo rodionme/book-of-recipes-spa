@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getCategories } from '../../../services';
 import './style.css';
 import Header from '../../Header'
 
@@ -14,7 +14,7 @@ export default class Categories extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/categories/')
+    getCategories()
       .then(({data: categories} = response) => {
         this.setState({
           categories

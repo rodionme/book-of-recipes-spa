@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getCuisine, deleteCuisine } from "../../../services";
 import './style.css';
 import Header from '../../Header'
 
@@ -20,19 +20,19 @@ export default class Cuisine extends React.Component {
     this.setState({
       cuisineId: this.props.match.params.cuisineId,
     }, () => {
-      axios.get(`/api/cuisines/${this.state.cuisineId}/`)
-      .then(({data: cuisine} = response) => {
-        this.setState({
-          cuisine
+      getCuisine(this.state.cuisineId)
+        .then(({data: cuisine} = response) => {
+          this.setState({
+            cuisine
+          });
         });
-      });
     });
   }
 
   deleteCuisine(e) {
     e.preventDefault();
 
-    axios.delete(`/api/cuisines/${this.state.cuisineId}/`)
+    deleteCuisine(this.state.cuisineId)
       .then(() => {
         this.props.history.push(`/cuisines`);
       });

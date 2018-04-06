@@ -1,5 +1,12 @@
 import React from 'react'
-import axios from 'axios';
+import {
+  getCategories,
+  getCuisines,
+  getIngredients,
+  getRecipe,
+  createRecipe,
+  updateRecipe
+} from "../../../services";
 import PropTypes from 'prop-types';
 import './style.css';
 import Header from '../../Header'
@@ -10,6 +17,7 @@ export default class EditRecipe extends React.Component {
     super();
 
     this.state = {
+      recipeId: null,
       name: '',
       category: 1,
       cuisine: 1,
@@ -26,21 +34,42 @@ export default class EditRecipe extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/categories/`)
+    let recipeId = this.props.match.params.recipeId;
+
+    if (recipeId) {
+      this.setState({
+        recipeId,
+      }, () => {
+        getRecipe(this.state.recipeId)
+          .then(({data: recipe} = response) => {
+            this.setState({
+              name: recipe.name,
+              category: recipe.category.id,
+              cuisine: recipe.cuisine.id,
+              description: recipe.description,
+              ingredients: recipe.ingredients.map(ingredient => {
+                return ingredient.id;
+              }),
+            });
+          });
+      });
+    }
+
+    getCategories()
       .then(({data: allCategories} = response) => {
         this.setState({
           allCategories,
         })
       });
 
-    axios.get(`/api/cuisines/`)
+    getCuisines()
       .then(({data: allCuisines} = response) => {
         this.setState({
           allCuisines,
         })
       });
 
-    axios.get(`/api/ingredients/`)
+    getIngredients()
       .then(({data: allIngredients} = response) => {
         this.setState({
           allIngredients,
@@ -71,17 +100,27 @@ export default class EditRecipe extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    axios.post(`/api/recipes/`, {
+    let recipeId = this.state.recipeId;
+    let data = {
       name: this.state.name,
       category: this.state.category,
       cuisine: this.state.cuisine,
       description: this.state.description,
       ingredients: this.state.ingredients,
-    })
-      .then(() => {
-        this.props.history.push(`/recipes`);
-      });
+    };
+
+    // TODO: CSRF token is absent
+    if (recipeId) {
+       updateRecipe(recipeId, data)
+        .then(() => {
+          this.props.history.push(`/recipes`);
+        });
+    } else {
+      createRecipe(data)
+        .then(() => {
+          this.props.history.push(`/recipes`);
+        });
+    }
   }
 
   render() {

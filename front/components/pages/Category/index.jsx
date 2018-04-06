@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getCategory, deleteCategory } from "../../../services";
 import './style.css';
 import Header from '../../Header'
 
@@ -20,19 +20,19 @@ export default class Category extends React.Component {
     this.setState({
       categoryId: this.props.match.params.categoryId,
     }, () => {
-      axios.get(`/api/categories/${this.state.categoryId}/`)
-      .then(({data: category} = response) => {
-        this.setState({
-          category
+      getCategory(this.state.categoryId)
+        .then(({data: category} = response) => {
+          this.setState({
+            category
+          });
         });
-      });
     });
   }
 
   deleteCategory(e) {
     e.preventDefault();
 
-    axios.delete(`/api/categories/${this.state.categoryId}/`)
+    deleteCategory(this.state.categoryId)
       .then(() => {
         this.props.history.push(`/categories`);
       });

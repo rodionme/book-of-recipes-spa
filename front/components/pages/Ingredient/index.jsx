@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getIngredient, deleteIngredient } from "../../../services";
 import './style.css';
 import Header from '../../Header'
 
@@ -20,19 +20,19 @@ export default class Ingredient extends React.Component {
     this.setState({
       ingredientId: this.props.match.params.ingredientId,
     }, () => {
-      axios.get(`/api/ingredients/${this.state.ingredientId}/`)
-      .then(({data: ingredient} = response) => {
-        this.setState({
-          ingredient
+      getIngredient(this.state.ingredientId)
+        .then(({data: ingredient} = response) => {
+          this.setState({
+            ingredient
+          });
         });
-      });
     });
   }
 
   deleteIngredient(e) {
     e.preventDefault();
 
-    axios.delete(`/api/ingredients/${this.state.ingredientId}/`)
+    deleteIngredient(this.state.ingredientId)
       .then(() => {
         this.props.history.push(`/ingredients`);
       });

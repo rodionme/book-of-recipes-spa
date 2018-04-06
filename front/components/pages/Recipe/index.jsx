@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getRecipe, deleteRecipe } from '../../../services';
 import './style.css';
 import Header from '../../Header'
 
@@ -20,19 +20,19 @@ export default class Recipe extends React.Component {
     this.setState({
       recipeId: this.props.match.params.recipeId,
     }, () => {
-      axios.get(`/api/recipes/${this.state.recipeId}/`)
-      .then(({data: recipe} = response) => {
-        this.setState({
-          recipe
+      getRecipe(this.state.recipeId)
+        .then(({data: recipe} = response) => {
+          this.setState({
+            recipe
+          });
         });
-      });
     });
   }
 
   deleteRecipe(e) {
     e.preventDefault();
 
-    axios.delete(`/api/recipes/${this.state.recipeId}/`)
+    deleteRecipe(this.state.recipeId)
       .then(() => {
         this.props.history.push(`/recipes`);
       });

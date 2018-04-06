@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getIngredients } from "../../../services";
 import './style.css';
 import Header from '../../Header'
 
@@ -14,7 +14,7 @@ export default class Ingredients extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/ingredients/')
+    getIngredients()
       .then(({data: ingredients} = response) => {
         this.setState({
           ingredients

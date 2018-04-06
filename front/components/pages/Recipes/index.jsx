@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getRecipes } from '../../../services';
 import './style.css';
 import Header from '../../Header'
 import Filters from '../../Filters'
@@ -21,7 +21,7 @@ export default class Recipes extends React.Component {
   }
 
   componentDidMount() {
-    this.getRecipes()
+    this.requestRecipes()
   }
 
   onSearchSubmit(e, query) {
@@ -29,7 +29,7 @@ export default class Recipes extends React.Component {
 
     this.setState({
       query
-    }, this.getRecipes);
+    }, this.requestRecipes);
   }
 
   onFiltersSubmit(e, selectedIngredients) {
@@ -37,10 +37,10 @@ export default class Recipes extends React.Component {
 
     this.setState({
       selectedIngredients
-    }, this.getRecipes);
+    }, this.requestRecipes);
   }
 
-  getRecipes() {
+  requestRecipes() {
     let params = {};
 
     if (this.state.query) {
@@ -51,7 +51,7 @@ export default class Recipes extends React.Component {
       params.i = this.state.selectedIngredients.join(',');
     }
 
-    axios.get('/api/recipes/', { params })
+    getRecipes(params)
       .then(({data: recipes} = response) => {
         this.setState({
           recipes,

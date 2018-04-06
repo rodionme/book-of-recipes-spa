@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import { getCategory, createCategory, updateCategory } from "../../../services";
 import PropTypes from 'prop-types';
 import './style.css';
 import Header from '../../Header'
@@ -10,11 +10,29 @@ export default class EditCategory extends React.Component {
     super();
 
     this.state = {
+      categoryId: null,
       name: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    let categoryId = this.props.match.params.categoryId;
+
+    if (categoryId) {
+      this.setState({
+        categoryId,
+      }, () => {
+        getCategory(this.state.categoryId)
+          .then(({data: category} = response) => {
+            this.setState({
+              name: category.name,
+            });
+          });
+      });
+    }
   }
 
   handleChange(e) {
@@ -25,13 +43,23 @@ export default class EditCategory extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    axios.post(`/api/categories/`, {
+    let categoryId = this.state.categoryId;
+    let data = {
       name: this.state.name,
-    })
-      .then(() => {
-        this.props.history.push(`/categories`);
-      });
+    };
+
+    // TODO: CSRF token is absent
+    if (categoryId) {
+      updateCategory(categoryId, data)
+        .then(() => {
+          this.props.history.push(`/categories`);
+        });
+    } else {
+      createCategory(data)
+        .then(() => {
+          this.props.history.push(`/categories`);
+        });
+    }
   }
 
   render() {
