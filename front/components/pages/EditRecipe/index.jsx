@@ -158,12 +158,12 @@ export default class EditRecipe extends React.Component {
 
               <p>
                 <label htmlFor="description">Description: </label>
-                <input name="description" onChange={this.handleChange} value={this.state.description} type="text" placeholder="Description" />
+                <textarea name="description" onChange={this.handleChange} value={this.state.description} placeholder="Description" />
               </p>
 
               <p>
                 <label htmlFor="ingredients">Ingredients: </label>
-                <select name="ingredients" onChange={this.handleChange} defaultValue={this.state.ingredients} multiple>
+                <select name="ingredients" onChange={this.handleChange} value={this.state.ingredients} multiple>
                   {this.state.allIngredients.map(ingredient => {
                     return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
                   })}
