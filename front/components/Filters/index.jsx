@@ -11,7 +11,6 @@ export default class Filters extends React.Component {
 
     this.state = {
       ingredients: [],
-      selectedIngredients: [],
     };
 
     this.onFiltersSubmit = this.onFiltersSubmit.bind(this);
@@ -36,10 +35,6 @@ export default class Filters extends React.Component {
       }
     }
 
-    this.setState({
-      selectedIngredients,
-    });
-
     this.props.onFiltersSubmit(e, selectedIngredients)
   }
 
@@ -57,18 +52,20 @@ export default class Filters extends React.Component {
             <ul className="filter-list">
               {/* Selected ingredients */}
               {ingredients
-                .filter(ingredient => this.state.selectedIngredients.indexOf(ingredient.id) > -1)
+                .filter(ingredient => this.props.selectedIngredients.indexOf(ingredient.id) > -1)
                 .map(ingredient => <Filter key={ingredient.id} filter={ingredient} selected/>)}
 
               {/* Unselected ingredients */}
               {ingredients
-                .filter(ingredient => this.state.selectedIngredients.indexOf(ingredient.id) === -1)
+                .filter(ingredient => this.props.selectedIngredients.indexOf(ingredient.id) === -1)
                 .map(ingredient => <Filter key={ingredient.id} filter={ingredient}/>)}
             </ul>
           </section>
 
-          <button className="filter-apply" type="submit">Apply</button>
-          {/* TODO: Add reset button */}
+          <section className="filter-actions">
+            <button className="filter-action" type="submit">Apply</button>
+            <button className="filter-action" onClick={this.props.onClearFilters} type="button">Clear</button>
+          </section>
         </form>
       </aside>
     );

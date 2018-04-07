@@ -1,5 +1,6 @@
 import React from 'react'
 import { getRecipes } from '../../../services';
+import PropTypes from 'prop-types';
 import './style.css';
 import Header from '../../Header'
 import Filters from '../../Filters'
@@ -18,6 +19,7 @@ export default class Recipes extends React.Component {
 
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onFiltersSubmit = this.onFiltersSubmit.bind(this);
+    this.onClearFilters = this.onClearFilters.bind(this);
   }
 
   componentDidMount() {
@@ -27,17 +29,21 @@ export default class Recipes extends React.Component {
   onSearchSubmit(e, query) {
     e.preventDefault();
 
-    this.setState({
-      query
-    }, this.requestRecipes);
+    this.setFilter({ query });
   }
 
   onFiltersSubmit(e, selectedIngredients) {
     e.preventDefault();
 
-    this.setState({
-      selectedIngredients
-    }, this.requestRecipes);
+    this.setFilter({ selectedIngredients });
+  }
+
+  onClearFilters() {
+    this.setFilter({ selectedIngredients: [] });
+  }
+
+  setFilter(filter) {
+    this.setState(filter, this.requestRecipes);
   }
 
   requestRecipes() {
@@ -71,7 +77,9 @@ export default class Recipes extends React.Component {
 
           <div className="divider divider-1"/>
 
-          <Filters onFiltersSubmit={this.onFiltersSubmit}/>
+          <Filters onFiltersSubmit={this.onFiltersSubmit}
+                   onClearFilters={this.onClearFilters}
+                   selectedIngredients={this.state.selectedIngredients}/>
         </section>
       </React.Fragment>
     );

@@ -29,8 +29,17 @@
   padding-left: 0;
 }
 
-.filter-apply {
+.filter-actions {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.filter-action {
   flex-shrink: 0;
   align-self: left;
   margin-top: 26px;
+}
+
+.filter-action + .filter-action {
+  margin-left: 10px;
 }
