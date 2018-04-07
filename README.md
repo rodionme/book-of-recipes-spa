@@ -1,9 +1,9 @@
 Book of Recipes with SPA
 ===========================
 
-### Python, Django, React, ES6
+### Python, Django, React, ES6, Axios, Webpack
 
-[IN DEVELOPMENT] App which helps to find a recipe by name or by ingredients.
+App which helps to find a recipe by name or by ingredients.
 
 
 ### Installation
