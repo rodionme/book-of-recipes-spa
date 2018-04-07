@@ -83,5 +83,7 @@ export default class EditCategory extends React.Component {
 }
 
 EditCategory.propTypes = {
-  name: PropTypes.string,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
 };

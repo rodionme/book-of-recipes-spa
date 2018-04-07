@@ -83,5 +83,7 @@ export default class EditIngredient extends React.Component {
 }
 
 EditIngredient.propTypes = {
-  name: PropTypes.string,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
 };

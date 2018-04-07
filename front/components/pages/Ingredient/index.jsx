@@ -61,3 +61,9 @@ export default class Ingredient extends React.Component {
     );
   }
 }
+
+Ingredient.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};

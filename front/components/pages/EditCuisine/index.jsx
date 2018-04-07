@@ -83,5 +83,7 @@ export default class EditCuisine extends React.Component {
 }
 
 EditCuisine.propTypes = {
-  name: PropTypes.string,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
 };

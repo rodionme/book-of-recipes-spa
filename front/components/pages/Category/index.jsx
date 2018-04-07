@@ -61,3 +61,9 @@ export default class Category extends React.Component {
     );
   }
 }
+
+Category.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};

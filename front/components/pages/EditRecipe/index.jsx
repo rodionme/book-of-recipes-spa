@@ -179,9 +179,7 @@ export default class EditRecipe extends React.Component {
 }
 
 EditRecipe.propTypes = {
-  name: PropTypes.string,
-  category: PropTypes.number,
-  cuisine: PropTypes.number,
-  description: PropTypes.string,
-  ingredients: PropTypes.array,
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
 };

@@ -61,3 +61,9 @@ export default class Cuisine extends React.Component {
     );
   }
 }
+
+Cuisine.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};

@@ -46,3 +46,9 @@ export default class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};
