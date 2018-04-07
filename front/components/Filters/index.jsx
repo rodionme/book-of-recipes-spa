@@ -11,16 +11,19 @@ export default class Filters extends React.Component {
 
     this.state = {
       ingredients: [],
+      filteredIngredients: [],
     };
 
     this.onFiltersSubmit = this.onFiltersSubmit.bind(this);
+    this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   componentDidMount() {
     getIngredients()
       .then(({data: ingredients} = response) => {
         this.setState({
-          ingredients
+          ingredients,
+          filteredIngredients: ingredients,
         });
       });
   }
@@ -38,8 +41,16 @@ export default class Filters extends React.Component {
     this.props.onFiltersSubmit(e, selectedIngredients)
   }
 
+  onSearchChange(e) {
+    let filteredIngredients = this.state.ingredients.filter(ingredient =>
+      ingredient.name.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+    );
+
+    this.setState({ filteredIngredients });
+  }
+
   render() {
-    let ingredients = this.state.ingredients;
+    let ingredients = this.state.filteredIngredients;
 
     return (
       <aside className="filters">
@@ -47,7 +58,7 @@ export default class Filters extends React.Component {
           <section className="filter-group">
             <h4 className="filter-title">Ingredients</h4>
 
-            {/* TODO: Add filtering input field for a quick finding of ingredient */}
+            <input className="filter-search" onChange={this.onSearchChange} type="text" placeholder="Input ingredient name" autoComplete="off"/>
 
             <ul className="filter-list">
               {/* Selected ingredients */}
@@ -73,5 +84,7 @@ export default class Filters extends React.Component {
 }
 
 Filters.propTypes = {
+  selectedIngredients: PropTypes.arrayOf(PropTypes.number),
   onFiltersSubmit: PropTypes.func,
+  onClearFilters: PropTypes.func,
 };
