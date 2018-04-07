@@ -85,3 +85,9 @@ export default class Recipes extends React.Component {
     );
   }
 }
+
+Recipes.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
+};
