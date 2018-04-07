@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import DocumentTitle from 'react-document-title';
 import { getCuisine, createCuisine, updateCuisine } from "../../../services";
 import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header'
+import Header from '../../Header';
 
 
 export default class EditCuisine extends React.Component {
@@ -63,22 +64,26 @@ export default class EditCuisine extends React.Component {
   }
 
   render() {
+    let name = this.state.name;
+
     return (
-      <React.Fragment>
-        <Header noSearch/>
+      <DocumentTitle title={(name ? 'Edit ' : 'Create ') + 'cuisine | Book of Recipes'}>
+        <React.Fragment>
+          <Header noSearch/>
 
-        <div className="divider divider-2"/>
+          <div className="divider divider-2"/>
 
-        <section className="content">
-          <main className="main-content">
-            <form action="" method="post" onSubmit={this.handleSubmit}>
-              <p>Name: <input name="name" onChange={this.handleChange} value={this.state.name} type="text" placeholder="Name" /></p>
+          <section className="content">
+            <main className="main-content">
+              <form action="" method="post" onSubmit={this.handleSubmit}>
+                <p>Name: <input name="name" onChange={this.handleChange} value={name} type="text" placeholder="Name" /></p>
 
-              <button type="submit">Save</button>
-            </form>
-          </main>
-        </section>
-      </React.Fragment>
+                <button type="submit">Save</button>
+              </form>
+            </main>
+          </section>
+        </React.Fragment>
+      </DocumentTitle>
     );
   }
 }

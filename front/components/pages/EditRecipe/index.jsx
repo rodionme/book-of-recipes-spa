@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import DocumentTitle from 'react-document-title';
 import {
   getCategories,
   getCuisines,
@@ -9,7 +10,7 @@ import {
 } from "../../../services";
 import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header'
+import Header from '../../Header';
 
 
 export default class EditRecipe extends React.Component {
@@ -124,57 +125,61 @@ export default class EditRecipe extends React.Component {
   }
 
   render() {
+    let name = this.state.name;
+
     return (
-      <React.Fragment>
-        <Header noSearch/>
+      <DocumentTitle title={(name ? 'Edit ' : 'Create ') + 'recipe | Book of Recipes'}>
+        <React.Fragment>
+          <Header noSearch/>
 
-        <div className="divider divider-2"/>
+          <div className="divider divider-2"/>
 
-        <section className="content">
-          <main className="main-content">
-            <form action="" method="post" onSubmit={this.handleSubmit}>
-              <p>
-                <label htmlFor="name">Name:</label>
-                <input name="name" onChange={this.handleChange} value={this.state.name} id="name" type="text" placeholder="Name" />
-              </p>
+          <section className="content">
+            <main className="main-content">
+              <form action="" method="post" onSubmit={this.handleSubmit}>
+                <p>
+                  <label htmlFor="name">Name:</label>
+                  <input name="name" onChange={this.handleChange} value={name} id="name" type="text" placeholder="Name" />
+                </p>
 
-              <p>
-                <label htmlFor="category">Category: </label>
-                <select name="category" onChange={this.handleChange} value={this.state.category}>
-                  {this.state.allCategories.map(category => {
-                    return <option key={category.id} value={category.id}>{category.name}</option>
-                  })}
-                </select>
-              </p>
+                <p>
+                  <label htmlFor="category">Category: </label>
+                  <select name="category" onChange={this.handleChange} value={this.state.category}>
+                    {this.state.allCategories.map(category => {
+                      return <option key={category.id} value={category.id}>{category.name}</option>
+                    })}
+                  </select>
+                </p>
 
-              <p>
-                <label htmlFor="cuisine">Cuisine: </label>
-                <select name="cuisine" onChange={this.handleChange} value={this.state.cuisine}>
-                  {this.state.allCuisines.map(cuisine => {
-                    return <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>
-                  })}
-                </select>
-              </p>
+                <p>
+                  <label htmlFor="cuisine">Cuisine: </label>
+                  <select name="cuisine" onChange={this.handleChange} value={this.state.cuisine}>
+                    {this.state.allCuisines.map(cuisine => {
+                      return <option key={cuisine.id} value={cuisine.id}>{cuisine.name}</option>
+                    })}
+                  </select>
+                </p>
 
-              <p>
-                <label htmlFor="description">Description: </label>
-                <textarea name="description" onChange={this.handleChange} value={this.state.description} placeholder="Description" />
-              </p>
+                <p>
+                  <label htmlFor="description">Description: </label>
+                  <textarea name="description" onChange={this.handleChange} value={this.state.description} placeholder="Description" />
+                </p>
 
-              <p>
-                <label htmlFor="ingredients">Ingredients: </label>
-                <select name="ingredients" onChange={this.handleChange} value={this.state.ingredients} multiple>
-                  {this.state.allIngredients.map(ingredient => {
-                    return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
-                  })}
-                </select>
-              </p>
+                <p>
+                  <label htmlFor="ingredients">Ingredients: </label>
+                  <select name="ingredients" onChange={this.handleChange} value={this.state.ingredients} multiple>
+                    {this.state.allIngredients.map(ingredient => {
+                      return <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
+                    })}
+                  </select>
+                </p>
 
-              <button type="submit">Save</button>
-            </form>
-          </main>
-        </section>
-      </React.Fragment>
+                <button type="submit">Save</button>
+              </form>
+            </main>
+          </section>
+        </React.Fragment>
+      </DocumentTitle>
     );
   }
 }

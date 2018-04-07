@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import DocumentTitle from 'react-document-title';
 import { getRecipes } from '../../../services';
 import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header'
-import Filters from '../../Filters'
-import RecipeList from '../../RecipeList'
+import Header from '../../Header';
+import Filters from '../../Filters';
+import RecipeList from '../../RecipeList';
 
 
 export default class Recipes extends React.Component {
@@ -67,21 +68,23 @@ export default class Recipes extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Header onSearchSubmit={this.onSearchSubmit}/>
+      <DocumentTitle title="Book of Recipes">
+        <React.Fragment>
+          <Header onSearchSubmit={this.onSearchSubmit}/>
 
-        <div className="divider divider-2"/>
+          <div className="divider divider-2"/>
 
-        <section className="content">
-          <RecipeList recipes={this.state.recipes} selectedIngredients={this.state.selectedIngredients}/>
+          <section className="content">
+            <RecipeList recipes={this.state.recipes} selectedIngredients={this.state.selectedIngredients}/>
 
-          <div className="divider divider-1"/>
+            <div className="divider divider-1"/>
 
-          <Filters onFiltersSubmit={this.onFiltersSubmit}
-                   onClearFilters={this.onClearFilters}
-                   selectedIngredients={this.state.selectedIngredients}/>
-        </section>
-      </React.Fragment>
+            <Filters onFiltersSubmit={this.onFiltersSubmit}
+                     onClearFilters={this.onClearFilters}
+                     selectedIngredients={this.state.selectedIngredients}/>
+          </section>
+        </React.Fragment>
+      </DocumentTitle>
     );
   }
 }

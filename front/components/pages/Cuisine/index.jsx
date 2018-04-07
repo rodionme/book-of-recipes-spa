@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import DocumentTitle from 'react-document-title';
 import { getCuisine, deleteCuisine } from "../../../services";
 import './style.css';
-import Header from '../../Header'
+import Header from '../../Header';
 
 
 export default class Cuisine extends React.Component {
@@ -42,24 +43,26 @@ export default class Cuisine extends React.Component {
     let cuisine = this.state.cuisine;
 
     return (
-      <React.Fragment>
-        <Header noSearch/>
+      <DocumentTitle title={cuisine ? `${cuisine.name} | Book of Recipes` : 'Book of Recipes'}>
+        <React.Fragment>
+          <Header noSearch/>
 
-        <div className="divider divider-2"/>
+          <div className="divider divider-2"/>
 
-        <section className="content">
-          <main className="main-content">
-            {cuisine && (
-              <React.Fragment>
-                <p>Name: {cuisine.name}</p>
+          <section className="content">
+            <main className="main-content">
+              {cuisine && (
+                <React.Fragment>
+                  <p>Name: {cuisine.name}</p>
 
-                <a href={`/cuisines/${cuisine.id}/edit`}>Edit</a>
-                <a href="" onClick={this.deleteCuisine}>Delete</a>
-              </React.Fragment>
-            )}
-          </main>
-        </section>
-      </React.Fragment>
+                  <a href={`/cuisines/${cuisine.id}/edit`}>Edit</a>
+                  <a href="" onClick={this.deleteCuisine}>Delete</a>
+                </React.Fragment>
+              )}
+            </main>
+          </section>
+        </React.Fragment>
+      </DocumentTitle>
     );
   }
 }
