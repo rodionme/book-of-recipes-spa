@@ -1,8 +1,8 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { getCuisine, deleteCuisine } from "../../../services";
+import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header';
+import { getCuisine, deleteCuisine } from "../../../services";
+import Page from '../../layouts/Page';
 
 
 export default class Cuisine extends React.Component {
@@ -46,26 +46,18 @@ export default class Cuisine extends React.Component {
     let cuisine = this.state.cuisine;
 
     return (
-      <DocumentTitle title={cuisine ? `${cuisine.name} | Book of Recipes` : 'Book of Recipes'}>
-        <React.Fragment>
-          <Header noSearch/>
+      <Page title={cuisine ? `${cuisine.name} | Book of Recipes` : 'Book of Recipes'} noSearch>
+        <main className="main-content">
+          {cuisine && (
+            <React.Fragment>
+              <p>Name: {cuisine.name}</p>
 
-          <div className="divider divider-2"/>
-
-          <section className="content">
-            <main className="main-content">
-              {cuisine && (
-                <React.Fragment>
-                  <p>Name: {cuisine.name}</p>
-
-                  <a href={`/cuisines/${cuisine.id}/edit`}>Edit</a>
-                  <a href="" onClick={this.deleteCuisine}>Delete</a>
-                </React.Fragment>
-              )}
-            </main>
-          </section>
-        </React.Fragment>
-      </DocumentTitle>
+              <a href={`/cuisines/${cuisine.id}/edit`}>Edit</a>
+              <a href="" onClick={this.deleteCuisine}>Delete</a>
+            </React.Fragment>
+          )}
+        </main>
+      </Page>
     );
   }
 }

@@ -1,9 +1,8 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { getRecipes } from '../../../services';
 import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header';
+import { getRecipes } from '../../../services';
+import Page from '../../layouts/Page';
 import Filters from '../../Filters';
 import RecipeList from '../../RecipeList';
 
@@ -68,23 +67,15 @@ export default class Recipes extends React.Component {
 
   render() {
     return (
-      <DocumentTitle title="Book of Recipes">
-        <React.Fragment>
-          <Header onSearchSubmit={this.onSearchSubmit}/>
+      <Page title="Book of Recipes">
+        <RecipeList recipes={this.state.recipes} selectedIngredients={this.state.selectedIngredients}/>
 
-          <div className="divider divider-2"/>
+        <div className="divider divider-1"/>
 
-          <section className="content">
-            <RecipeList recipes={this.state.recipes} selectedIngredients={this.state.selectedIngredients}/>
-
-            <div className="divider divider-1"/>
-
-            <Filters onFiltersSubmit={this.onFiltersSubmit}
-                     onClearFilters={this.onClearFilters}
-                     selectedIngredients={this.state.selectedIngredients}/>
-          </section>
-        </React.Fragment>
-      </DocumentTitle>
+        <Filters onFiltersSubmit={this.onFiltersSubmit}
+                 onClearFilters={this.onClearFilters}
+                 selectedIngredients={this.state.selectedIngredients}/>
+      </Page>
     );
   }
 }

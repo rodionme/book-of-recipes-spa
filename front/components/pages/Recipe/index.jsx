@@ -1,8 +1,8 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { getRecipe, deleteRecipe } from '../../../services';
+import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header';
+import { getRecipe, deleteRecipe } from '../../../services';
+import Page from '../../layouts/Page';
 
 
 export default class Recipe extends React.Component {
@@ -46,35 +46,27 @@ export default class Recipe extends React.Component {
     let recipe = this.state.recipe;
 
     return (
-      <DocumentTitle title={recipe ? `${recipe.name} | Book of Recipes` : 'Book of Recipes'}>
-        <React.Fragment>
-          <Header noSearch/>
+      <Page title={recipe ? `${recipe.name} | Book of Recipes` : 'Book of Recipes'} noSearch>
+        <main className="main-content">
+          {recipe && (
+            <React.Fragment>
+              <p>Name: {recipe.name}</p>
+              <p>Category: {recipe.category.name}</p>
+              <p>Cuisine: {recipe.cuisine.name}</p>
+              <p>Description: {recipe.description}</p>
+              <p>Ingredients:</p>
+              <ul>
+                {recipe.ingredients.map(ingredient => {
+                  return <li key={ingredient.id}>{ingredient.name}</li>
+                })}
+              </ul>
 
-          <div className="divider divider-2"/>
-
-          <section className="content">
-            <main className="main-content">
-              {recipe && (
-                <React.Fragment>
-                  <p>Name: {recipe.name}</p>
-                  <p>Category: {recipe.category.name}</p>
-                  <p>Cuisine: {recipe.cuisine.name}</p>
-                  <p>Description: {recipe.description}</p>
-                  <p>Ingredients:</p>
-                  <ul>
-                    {recipe.ingredients.map(ingredient => {
-                      return <li key={ingredient.id}>{ingredient.name}</li>
-                    })}
-                  </ul>
-
-                  <a href={`/recipes/${recipe.id}/edit`}>Edit</a>
-                  <a href="" onClick={this.deleteRecipe}>Delete</a>
-                </React.Fragment>
-              )}
-            </main>
-          </section>
-        </React.Fragment>
-      </DocumentTitle>
+              <a href={`/recipes/${recipe.id}/edit`}>Edit</a>
+              <a href="" onClick={this.deleteRecipe}>Delete</a>
+            </React.Fragment>
+          )}
+        </main>
+      </Page>
     );
   }
 }

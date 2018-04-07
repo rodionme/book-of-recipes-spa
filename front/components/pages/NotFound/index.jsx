@@ -1,14 +1,14 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
 import './style.css';
+import Page from '../../layouts/Page';
 
 
 export default function NotFound() {
   return (
-    <DocumentTitle title="404 | Book of Recipes">
-      <div>
+    <Page title="404 | Book of Recipes" noSearch>
+      <main className="main-content">
         <h2>Not Found</h2>
-      </div>
-    </DocumentTitle>
+      </main>
+    </Page>
   );
 }

@@ -1,9 +1,8 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { getCategory, createCategory, updateCategory } from "../../../services";
 import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header';
+import { getCategory, createCategory, updateCategory } from '../../../services';
+import Page from '../../layouts/Page';
 
 
 export default class EditCategory extends React.Component {
@@ -70,23 +69,15 @@ export default class EditCategory extends React.Component {
     let name = this.state.name;
 
     return (
-      <DocumentTitle title={(name ? 'Edit ' : 'Create ') + 'category | Book of Recipes'}>
-        <React.Fragment>
-          <Header noSearch/>
+      <Page title={(name ? 'Edit ' : 'Create ') + 'category | Book of Recipes'} noSearch>
+        <main className="main-content">
+          <form action="" method="post" onSubmit={this.handleSubmit}>
+            <p>Name: <input name="name" onChange={this.handleChange} value={name} type="text" placeholder="Name" /></p>
 
-          <div className="divider divider-2"/>
-
-          <section className="content">
-            <main className="main-content">
-              <form action="" method="post" onSubmit={this.handleSubmit}>
-                <p>Name: <input name="name" onChange={this.handleChange} value={name} type="text" placeholder="Name" /></p>
-
-                <button type="submit">Save</button>
-              </form>
-            </main>
-          </section>
-        </React.Fragment>
-      </DocumentTitle>
+            <button type="submit">Save</button>
+          </form>
+        </main>
+      </Page>
     );
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { getIngredient, deleteIngredient } from "../../../services";
+import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header';
+import { getIngredient, deleteIngredient } from '../../../services';
+import Page from '../../layouts/Page';
 
 
 export default class Ingredient extends React.Component {
@@ -46,26 +46,18 @@ export default class Ingredient extends React.Component {
     let ingredient = this.state.ingredient;
 
     return (
-      <DocumentTitle title={ingredient ? `${ingredient.name} | Book of Recipes` : 'Book of Recipes'}>
-        <React.Fragment>
-          <Header noSearch/>
+      <Page title={ingredient ? `${ingredient.name} | Book of Recipes` : 'Book of Recipes'} noSearch>
+        <main className="main-content">
+          {ingredient && (
+            <React.Fragment>
+              <p>Name: {ingredient.name}</p>
 
-          <div className="divider divider-2"/>
-
-          <section className="content">
-            <main className="main-content">
-              {ingredient && (
-                <React.Fragment>
-                  <p>Name: {ingredient.name}</p>
-
-                  <a href={`/ingredients/${ingredient.id}/edit`}>Edit</a>
-                  <a href="" onClick={this.deleteIngredient}>Delete</a>
-                </React.Fragment>
-              )}
-            </main>
-          </section>
-        </React.Fragment>
-      </DocumentTitle>
+              <a href={`/ingredients/${ingredient.id}/edit`}>Edit</a>
+              <a href="" onClick={this.deleteIngredient}>Delete</a>
+            </React.Fragment>
+          )}
+        </main>
+      </Page>
     );
   }
 }

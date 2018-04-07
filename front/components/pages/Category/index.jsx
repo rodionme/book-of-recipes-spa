@@ -1,8 +1,8 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
-import { getCategory, deleteCategory } from "../../../services";
+import PropTypes from 'prop-types';
 import './style.css';
-import Header from '../../Header';
+import { getCategory, deleteCategory } from '../../../services';
+import Page from '../../layouts/Page';
 
 
 export default class Category extends React.Component {
@@ -46,26 +46,18 @@ export default class Category extends React.Component {
     let category = this.state.category;
 
     return (
-      <DocumentTitle title={category ? `${category.name} | Book of Recipes` : 'Book of Recipes'}>
-        <React.Fragment>
-          <Header noSearch/>
+      <Page title={category ? `${category.name} | Book of Recipes` : 'Book of Recipes'} noSearch>
+        <main className="main-content">
+          {category && (
+            <React.Fragment>
+              <p>Name: {category.name}</p>
 
-          <div className="divider divider-2"/>
-
-          <section className="content">
-            <main className="main-content">
-              {category && (
-                <React.Fragment>
-                  <p>Name: {category.name}</p>
-
-                  <a href={`/categories/${category.id}/edit`}>Edit</a>
-                  <a href="" onClick={this.deleteCategory}>Delete</a>
-                </React.Fragment>
-              )}
-            </main>
-          </section>
-        </React.Fragment>
-      </DocumentTitle>
+              <a href={`/categories/${category.id}/edit`}>Edit</a>
+              <a href="" onClick={this.deleteCategory}>Delete</a>
+            </React.Fragment>
+          )}
+        </main>
+      </Page>
     );
   }
 }
