@@ -31,6 +31,9 @@ export default class EditCuisine extends React.Component {
             this.setState({
               name: cuisine.name,
             });
+          })
+          .catch(() => {
+            this.props.history.replace('/404')
           });
       });
     }

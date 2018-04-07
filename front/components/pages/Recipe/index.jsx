@@ -26,6 +26,9 @@ export default class Recipe extends React.Component {
           this.setState({
             recipe
           });
+        })
+        .catch(() => {
+          this.props.history.replace('/404')
         });
     });
   }

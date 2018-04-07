@@ -52,6 +52,9 @@ export default class EditRecipe extends React.Component {
                 return ingredient.id;
               }),
             });
+          })
+          .catch(() => {
+            this.props.history.replace('/404')
           });
       });
     }

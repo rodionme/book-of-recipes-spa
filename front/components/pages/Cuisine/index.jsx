@@ -26,6 +26,9 @@ export default class Cuisine extends React.Component {
           this.setState({
             cuisine
           });
+        })
+        .catch(() => {
+          this.props.history.replace('/404')
         });
     });
   }

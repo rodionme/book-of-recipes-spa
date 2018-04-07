@@ -26,6 +26,9 @@ export default class Ingredient extends React.Component {
           this.setState({
             ingredient
           });
+        })
+        .catch(() => {
+          this.props.history.replace('/404')
         });
     });
   }

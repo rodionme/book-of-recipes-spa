@@ -31,6 +31,9 @@ export default class EditCategory extends React.Component {
             this.setState({
               name: category.name,
             });
+          })
+          .catch(() => {
+            this.props.history.replace('/404')
           });
       });
     }

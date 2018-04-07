@@ -31,6 +31,9 @@ export default class EditIngredient extends React.Component {
             this.setState({
               name: ingredient.name,
             });
+          })
+          .catch(() => {
+            this.props.history.replace('/404')
           });
       });
     }

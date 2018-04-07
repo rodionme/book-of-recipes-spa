@@ -26,6 +26,9 @@ export default class Category extends React.Component {
           this.setState({
             category
           });
+        })
+        .catch(() => {
+          this.props.history.replace('/404')
         });
     });
   }
