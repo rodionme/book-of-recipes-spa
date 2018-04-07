@@ -14,7 +14,7 @@ export default class Filters extends React.Component {
       selectedIngredients: [],
     };
 
-    this.onFilterChange = this.onFilterChange.bind(this);
+    this.onFiltersSubmit = this.onFiltersSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -26,18 +26,21 @@ export default class Filters extends React.Component {
       });
   }
 
-  onFilterChange(e, filterId, isChecked) {
-    let updatedSelectedIngredients = this.state.selectedIngredients;
+  onFiltersSubmit(e) {
+    let selectedIngredients = [];
+    let checkboxes = e.currentTarget.querySelectorAll('input[type=checkbox]');
 
-    if (isChecked) {
-      updatedSelectedIngredients.push(filterId);
-    } else {
-      updatedSelectedIngredients = updatedSelectedIngredients.filter(e => e !== filterId);
+    for (let i = 0, l = checkboxes.length; i < l; i++) {
+      if (checkboxes[i].checked) {
+        selectedIngredients.push(Number(checkboxes[i].value));
+      }
     }
 
     this.setState({
-      selectedIngredients: updatedSelectedIngredients
+      selectedIngredients,
     });
+
+    this.props.onFiltersSubmit(e, selectedIngredients)
   }
 
   render() {
@@ -45,17 +48,22 @@ export default class Filters extends React.Component {
 
     return (
       <aside className="filters">
-        <form action="" className="filter-form" onSubmit={e => this.props.onFiltersSubmit(e, this.state.selectedIngredients)}>
+        <form action="" className="filter-form" onSubmit={this.onFiltersSubmit}>
           <section className="filter-group">
             <h4 className="filter-title">Ingredients</h4>
 
-            <ul className="filter-list">
-              {/* TODO: Pull up selected ingredients to top of the list */}
-              {/* TODO: Add filtering input field for a quick finding of ingredient */}
+            {/* TODO: Add filtering input field for a quick finding of ingredient */}
 
-              {ingredients.map(ingredient => {
-                return <Filter key={ingredient.id} filter={ingredient} onFilterChange={this.onFilterChange}/>;
-              })}
+            <ul className="filter-list">
+              {/* Selected ingredients */}
+              {ingredients
+                .filter(ingredient => this.state.selectedIngredients.indexOf(ingredient.id) > -1)
+                .map(ingredient => <Filter key={ingredient.id} filter={ingredient} selected/>)}
+
+              {/* Unselected ingredients */}
+              {ingredients
+                .filter(ingredient => this.state.selectedIngredients.indexOf(ingredient.id) === -1)
+                .map(ingredient => <Filter key={ingredient.id} filter={ingredient}/>)}
             </ul>
           </section>
 

@@ -4,21 +4,9 @@ import './style.css';
 
 
 export default class Filter extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
-
-    this.state = {
-      isChecked: props.filter.selected,
-    };
-
-    this.onChange = this.onChange.bind(this);
   }
-
-  onChange(e) {
-    this.setState({
-      isChecked: e.target.checked
-    });
-  };
 
   render() {
     let filter = this.props.filter;
@@ -26,13 +14,7 @@ export default class Filter extends React.Component {
     return (
       <li>
         <label>
-          <input
-            type="checkbox"
-            name="i"
-            onChange={e => this.props.onFilterChange(e, this.props.filter.id, e.target.checked)}
-            defaultValue={filter.id}
-            defaultChecked={this.state.isChecked}
-          />
+          <input type="checkbox" name="i" defaultValue={filter.id} defaultChecked={this.props.selected}/>
 
           <span>{filter.name}</span>
         </label>
@@ -46,5 +28,4 @@ Filter.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }),
-  onFilterChange: PropTypes.func,
 };
